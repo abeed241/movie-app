@@ -1,11 +1,14 @@
 body {
   font-family: Arial, sans-serif;
   background: #f4f4f4;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 .container {
   text-align: center;
-  padding: 30px;
+  
 }
 
 .search input {
@@ -75,4 +78,6 @@ body {
   .search button {
     margin-top: 16px;
   }
+   
 }
+
