@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useFavorites } from "../context/FavoritesContext";
 import "./Home.css";
-
 
 function Home() {
   const [movie, setMovie] = useState("");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
 
-const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
+  // 👉 Favorites Context
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-
+  const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 
   const fetchMovie = async () => {
     setError("");
@@ -33,10 +34,13 @@ const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
     }
   };
 
+  // 👉 Check if movie is already favorite
+  const isFavorite =
+    data && favorites.some((m) => m.imdbID === data.imdbID);
+
   return (
     <div className="container">
-     
-      <h1>🎬 OMDb Movie Finder</h1>
+      <h1>🎬 Movie Finder</h1>
 
       <div className="search">
         <input
@@ -62,6 +66,17 @@ const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
             <p><strong>Actors:</strong> {data.Actors}</p>
             <p><strong>IMDb Rating:</strong> ⭐ {data.imdbRating}</p>
             <p><strong>Plot:</strong> {data.Plot}</p>
+
+            {/* ⭐ Favorites button */}
+            <button
+              onClick={() =>
+                isFavorite
+                  ? removeFavorite(data.imdbID)
+                  : addFavorite(data)
+              }
+            >
+              {isFavorite ? "remove" : "❤️"}
+            </button>
           </div>
         </div>
       )}
