@@ -1,15 +1,19 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  margin: 0px;
-  padding: 0px;
+/* Reset and sensible defaults */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+} 
+
 .container {
   text-align: center;
-
-}
+  padding-top: 56px; /* reserve space for the sticky navbar */
+} 
 
 .search input {
   padding: 10px;
@@ -71,12 +75,15 @@ body {
     align-items: center;
     /* center content */
     text-align: center;
-    /* center text for mobile */
-    width:300px;
+    /* make card responsive on mobile */
+    width: 100%;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .movie-card img {
-    width: 70%;
+    width: 100%;
     /* full width on mobile */
     max-width: 300px;
     /* optional: limit max width */
@@ -96,6 +103,10 @@ body {
     margin-top: 16px;
   }
 
+  .search input {
+    width: 80%;
+    max-width: 320px;
+  }
 
 }
 .movie-details button {
@@ -120,23 +131,28 @@ body {
   margin-top: 30px;
 }
 
-/* Make favorite cards vertical */
+/* Make favorite cards vertical and responsive */
 .favorite-card {
+  display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 200px;
+  width: 100%;
+  max-width: 250px;
   margin-top: 10px;
   padding: 10px;
-}
+  box-sizing: border-box;
+} 
 
 /* Poster inside favorite card */
 .favorite-card img {
-  width: 75%;
+  display: block;
+  width: 100%;
   max-width: 250px;
   height: auto;
   margin-bottom: 15px;
-}
+  object-fit: cover;
+} 
 
 /* Button spacing */
 .favorite-card button {
@@ -144,33 +160,32 @@ body {
 }
 
 @media (max-width: 600px) {
-
-  /* Force grid wrapping like desktop */
   .favorites-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 cards per row */
+    gap: 12px;
+  }
 
+  .favorite-card {
+    width: 100%;
+    max-width: 220px;
+    margin: 10px auto;
+  }
 
-    flex-direction: column;
+  .favorite-card img {
+    max-width: 140px;
+    width: 100%;
+  }
 
+  .favorite-card h3 {
+    font-size: 14px;
+  }
 
-    /* Reduce poster size */
-    .favorite-card img {
-      max-width: 140px;
-    }
+  .favorite-card p {
+    font-size: 12px;
+  }
 
-    /* Reduce text size slightly */
-    .favorite-card h3 {
-      font-size: 14px;
-    }
-
-    .favorite-card p {
-      font-size: 12px;
-    }
-
-    .favorite-card button {
-      font-size: 12px;
-      padding: 6px 10px;
-    }
+  .favorite-card button {
+    font-size: 12px;
+    padding: 6px 10px;
   }
 }
